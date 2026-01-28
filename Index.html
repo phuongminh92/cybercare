@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ĐỪNG IM LẶNG - HÃY HÀNH ĐỘNG</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: url('1.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #0f172a;
+        }
+
+        header {
+            background: url('0.png') no-repeat center fixed ;
+	    background-size: 100% auto
+            color: white;background-repeat: no-repeat;
+            background-position: center top;
+            background-attachment: fixed; /* Giữ ảnh đứng yên khi cuộn */
+            background-size: 100% auto; 
+            color: #0f172a;
+            text-align: center;
+            padding: 70px 20px;
+        }
+
+        header h1 {
+            font-size: 44px;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            font-size: 19px;
+        }
+
+        nav {
+            background: #0f172a;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 14px 0;
+        }
+
+        nav a {
+            color: #f8fafc;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #f97316;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: auto;
+            padding: 40px 25px;
+            background: linear-gradient(180deg, #ffffff, #f1f5f9);
+            border-radius: 22px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+        }
+
+        section {
+            margin-bottom: 60px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        section h2 {
+            color: #0f172a;
+            border-left: 6px solid #f97316;
+            padding-left: 12px;
+        }
+
+        .intro {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 22px;
+            align-items: center;
+        }
+
+        .intro img {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 26px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 22px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            text-align: center;
+            border-top: 5px solid #0ea5e9;
+            color: #0f172a;
+        }
+
+        .card img {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            color: #0f172a;
+        }
+
+        .action {
+            background: #ffffff;
+            padding: 32px;
+            border-radius: 18px;
+            border-left: 6px solid #f97316;
+            color: #0f172a;
+        }
+
+        .action ul {
+            line-height: 1.9;
+        }
+
+        .highlight {
+            background: #fff7ed;
+            padding: 18px;
+            border-radius: 12px;
+            border: 2px dashed #f97316;
+            margin: 20px 0;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        footer {
+            background: #0f172a;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 13px 28px;
+            background: #f97316;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #ea580c;
+        }
+            
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            padding: 25px 20px;
+            background: #020617;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+            transition: transform 0.3s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+    
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 85vh;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .hero-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.2s ease-in-out;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.55);
+        }
+
+        .hero-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #ffffff;
+            z-index: 2;
+            max-width: 800px;
+            padding: 25px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 15px;
+        }
+
+        .hero-text h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 8px black;
+            color: #f97316;
+        }
+
+        .hero-text p {
+            font-size: 20px;
+            line-height: 1.6;
+            color: #f8fafc;
+        }
+            
+        /* Fix màu chữ cho các phần phía sau */
+        #phapluat, #tinhhuong, #faq, #checklist, #tongket, #camket {
+            color: #0f172a;
+        }
+
+        #phapluat p, #tinhhuong p, #faq p, #checklist li, #tongket p, #camket li {
+            color: #1e293b;
+        }
+
+        #phapluat .action,
+        #faq .action,
+        #checklist .action,
+        #camket .action {
+            background: #f8fafc;
+        }
+    
+        /* Fix toàn bộ chữ bị chìm trên nền galaxy */
+        .container p,
+        .container li,
+        .container span,
+        .container div {
+            color: #0f172a;
+        }
+
+        .container h2,
+        .container h3 {
+            color: #020617;
+        }
+
+        .cards p,
+        .cards h3 {
+            color: #020617;
+        }
+
+        .intro p {
+            color: #020617;
+        }
+
+        .action p,
+        .action li {
+            color: #020617;
+        }
+    
+        /* Fix riêng phần 16 bị chìm màu */
+        #phan16,
+        #phan16 p,
+        #phan16 li,
+        #phan16 span,
+        #phan16 div {
+            color: #020617 !important;
+            background: #ffffff;
+        }
+
+        #phan16 h2,
+        #phan16 h3 {
+            color: #020617 !important;
+        }
+    
+        /* Đổi chữ phần 16 sang màu trắng */
+        #tongket16,
+        #tongket16 p,
+        #tongket16 h2 {
+            color: #ffffff !important;
+            background: transparent;
+        }
+    
+        /* Thu nhỏ hình ảnh trong phần 16 */
+        #tongket16 img {
+            max-width: 60%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 12px;
+        }
+    
+        /* Ảnh cho các phần từ 12 trở lên */
+        #phapluat img,
+        #tinhhuong img,
+        #faq img,
+        #checklist img,
+        #tongket img,
+        #camket img {
+            width: 100%;
+            max-height: 220px;
+            object-fit: cover;
+            border-radius: 18px;
+            margin: 18px 0 28px 0;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.3);
+        } {
+            width: 100%;
+            max-height: 260px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin: 15px 0 25px 0;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+        }
+    
+        /* Căn chỉnh kích cỡ và vị trí ảnh từ phần 12 trở lên */
+        #phapluat img,
+        #tinhhuong img,
+        #faq img,
+        #checklist img,
+        #tongket img,
+        #camket img {
+            width: 85%;
+            max-width: 700px;
+            max-height: 240px;
+            object-fit: cover;
+            display: block;
+            margin: 20px auto 30px auto; /* Căn giữa */
+            border-radius: 18px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+        }
+    </style>
+</head>
+<body>
+
+<header style="text-align: center; padding: 3px; background-color: WHITE;">
+    <h1 style="font-size: 48px; color: rgb(255, 255, 0); margin-bottom: 10px; 
+               background-color: rgba(255, 0, 0, 0.7); display: inline-block; padding: 10px 20px; border-radius: 8px;">
+        ĐỪNG IM LẶNG - HÃY HÀNH ĐỘNG 
+    </h1>
+    <p style="font-size: 30px; 
+	color: rgba(255, 0, 0); 
+	font-weight: bold; 
+	background-color: 
+ 	rgba(248, 248, 255, 0.6); 
+	border-radius: 8px;
+	display: inline-block; 
+        padding: 5px 20px;
+	text-shadow: -1px -1px 0 #FFFF00, 1px -1px 0 #FFFF00, -1px 1px 0 #FFFF00, 1px 1px 0 #FFFF00;">
+         CHUNG TAY PHÒNG CHỐNG BẠO LỰC KHÔNG GIAN MẠNG
+    </p>
+</header>
+
+<!-- Banner quảng cáo mở đầu -->
+<!-- Banner quảng cáo mở đầu -->
+<section class="hero">
+    <div class="hero-slide active" style="background-image:url('2.jpg');">
+        <div class="hero-text">
+            <h2>Thế giới số không phải lúc nào cũng an toàn</h2>
+            <p>Đằng sau màn hình là những câu chuyện chưa được kể</p>
+        </div>
+    </div>
+
+    <div class="hero-slide" style="background-image:url('3.jpg');">
+        <div class="hero-text">
+            <h2>Một cú click có thể làm tổn thương</h2>
+            <p>Hãy suy nghĩ trước khi bình luận</p>
+        </div>
+    </div>
+
+    <div class="hero-slide" style="background-image:url('4.jpg');">
+        <div class="hero-text">
+            <h2>Chúng ta có quyền được an toàn</h2>
+            <p>Không ai đáng bị bắt nạt trên mạng</p>
+        </div>
+    </div>
+
+    <div class="hero-slide" style="background-image:url('5.jpg');">
+        <div class="hero-text">
+            <h2>Hãy cùng thay đổi môi trường mạng</h2>
+            <p>Bắt đầu từ chính bạn – ngay hôm nay</p>
+        </div>
+    </div>
+</section>
+
+<script>
+let slides = document.querySelectorAll('.hero-slide');
+let index = 0;
+
+setInterval(() => {
+    slides[index].classList.remove('active');
+    index = (index + 1) % slides.length;
+    slides[index].classList.add('active');
+}, 4000);
+</script>
+
+<!-- Banner thông điệp -->
+<div class="highlight" style="font-size: 24px; color: #ff5733; font-weight: bold;">
+     "MỖI LỜI NÓI ĐỀU CÓ SỨC NẶNG. BÌNH LUẬN ĐỂ YÊU THƯƠNG, KHÔNG PHẢI LÀM TỔN THƯƠNG." 
+</div>
+
+<nav>
+    <a href="#gioithieu">GIỚI THIỆU</a>
+    <a>|</a>
+    <a href="#thuctrang">THỰC TRẠNG</a>
+    <a>|</a>
+    <a href="#tacdong">TÁC ĐỘNG</a>
+    <a>|</a>
+    <a href="#hanhdong">HÀNH ĐỘNG</a>
+    </nav>
+
+<div class="container">
+
+    <!-- Giới thiệu -->
+    <section id="gioithieu">
+        <h2>BẠO LỰC KHÔNG GIAN MẠNG HIỆN NAY</h2>
+        <div class="action">
+            <p style="font-size: 22px; line-height: 1.6;">
+                Trong thời đại công nghệ số, Internet và mạng xã hội đã trở thành một phần
+                không thể thiếu trong cuộc sống của học sinh. Tuy nhiên, bên cạnh những lợi ích,
+                môi trường mạng cũng tiềm ẩn nhiều nguy cơ, đặc biệt là bạo lực không gian mạng.
+            </p>
+            <p style="font-size: 22px; line-height: 1.6;">
+                Nhiều bạn học sinh đã trở thành nạn nhân của những lời nói ác ý, sự xúc phạm,
+                bôi nhọ danh dự trên mạng, dẫn đến tổn thương tinh thần nghiêm trọng.
+            </p>
+            <p style="font-size: 22px; line-height: 1.6;">
+                Vì vậy, việc tuyên truyền và nâng cao nhận thức về phòng chống bạo lực mạng
+                là vô cùng cần thiết trong nhà trường hiện nay.
+            </p>
+        </div>
+    </section>
+
+    <section id="gioithieu">
+        <h2>1. Bạo lực không gian mạng là gì?</h2>
+        <div class="intro">
+            <div>
+                <p style="font-size: 22px; line-height: 1.6;">
+                    Bạo lực không gian mạng là hành vi xúc phạm, đe dọa, bôi nhọ,
+                    lan truyền thông tin sai sự thật trên Internet nhằm gây tổn hại
+                    đến danh dự, tinh thần và cuộc sống của người khác.
+                </p>
+                <p style="font-size: 22px; line-height: 1.6;">
+                    Hiện nay, tình trạng này ngày càng phổ biến, đặc biệt trong học sinh, sinh viên.
+                </p>
+            </div>
+            <img src="6.jpg" alt="Internet">
+        </div>
+    </section>
+
+    <!-- Thực trạng -->
+        <!-- Biểu hiện cụ thể -->
+    <section id="bieuhien">
+        <h2>2. Các biểu hiện thường gặp của bạo lực mạng</h2>
+        <div class="action">
+            <ul style="font-size: 22px; line-height: 1.6; color: #1e293b;">
+                <li>Chửi bới, xúc phạm danh dự qua tin nhắn, bình luận.</li>
+                <li>Đăng hình ảnh, video riêng tư khi chưa được phép.</li>
+                <li>Lập nhóm để cô lập, nói xấu người khác.</li>
+                <li>Giả mạo tài khoản để lừa đảo, bôi nhọ.</li>
+                <li>Đe dọa, khủng bố tinh thần qua mạng.</li>
+            </ul>
+            <p style="font-size: 22px; line-height: 1.6; color: #1e293b;">
+                Những hành vi này tuy diễn ra trên Internet nhưng hậu quả để lại
+                ngoài đời thực là vô cùng nặng nề.
+            </p>
+        </div>
+    </section>
+
+    <section id="thuctrang">
+        <h2>2. Thực trạng hiện nay</h2>
+        <div class="cards">
+            <div class="card">
+                <img src="7.jpg" alt="Bình luận xấu">
+                <h3>Bình luận tiêu cực</h3>
+                <p>Nhiều người bị xúc phạm, chửi bới trên mạng xã hội.</p>
+            </div>
+
+            <div class="card">
+                <img src="8.jpg" alt="Tin giả">
+                <h3>Tin giả</h3>
+                <p>Thông tin sai lệch được lan truyền nhanh chóng.</p>
+            </div>
+
+            <div class="card">
+                <img src="9.jpg" alt="Áp lực">
+                <h3>Áp lực tâm lý</h3>
+                <p>Nạn nhân dễ rơi vào stress, lo âu, trầm cảm.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tác động -->
+        <!-- Hậu quả lâu dài -->
+    <section id="hauqua">
+        <h2>3. Hậu quả lâu dài của bạo lực mạng</h2>
+        <div class="intro">
+            <div>
+                <p style="font-size: 22px; line-height: 1.6; color: #1e293b;">
+                    Bạo lực không gian mạng không chỉ gây tổn thương nhất thời
+                    mà còn để lại hậu quả lâu dài đối với nạn nhân.
+                </p>
+                <p style="font-size: 22px; line-height: 1.6; color: #1e293b;">
+                    Nhiều bạn học sinh trở nên tự ti, mất niềm tin vào bản thân,
+                    ngại giao tiếp và thu mình lại với xã hội.
+                </p>
+                <p style="font-size: 22px; line-height: 1.6; color: #1e293b;">
+                    Trong những trường hợp nghiêm trọng, nạn nhân có thể rơi vào
+                    trạng thái trầm cảm, suy nghĩ tiêu cực và thậm chí có hành vi nguy hiểm.
+                </p>
+            </div>
+            <img src="10.jpg" alt="Hậu quả">
+        </div>
+    </section>
+
+    <section id="tacdong">
+        <h2>3. Tác động của bạo lực mạng</h2>
+        <div class="cards">
+            <div class="card">
+                <img src="11.jpg" alt="Buồn bã">
+                <h3>Tinh thần</h3>
+                <p>Gây tổn thương tâm lý nghiêm trọng cho nạn nhân.</p>
+            </div>
+
+            <div class="card">
+                <img src="12.jpg" alt="Học tập">
+                <h3>Học tập</h3>
+                <p>Ảnh hưởng đến kết quả học tập và sinh hoạt.</p>
+            </div>
+
+            <div class="card">
+                <img src="13.jpg" alt="Xã hội">
+                <h3>Xã hội</h3>
+                <p>Làm suy giảm niềm tin và sự đoàn kết.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hành động -->
+    <section id="hanhdong">
+        <h2>4. Chúng ta cần làm gì?</h2>
+        <div class="action">
+            <ul style="font-size: 22px; line-height: 1.6; color: #1e293b;">
+                <li> Không tham gia bình luận tiêu cực.</li>
+                <li> Tôn trọng và lắng nghe người khác.</li>
+                <li> Báo cáo nội dung xấu độc.</li>
+                <li> Ủng hộ và bảo vệ nạn nhân.</li>
+                <li> Sử dụng mạng xã hội văn minh.</li>
+            </ul>
+
+            <p style="font-size: 22px; line-height: 1.6; color: #1e293b;">
+                Mỗi hành động nhỏ của bạn hôm nay sẽ tạo nên một môi trường mạng an toàn cho ngày mai.
+            </p>
+
+            <a href="#kynang" class="btn">Bắt đầu thay đổi</a>
+        </div>
+    </section>
+
+    <!-- Câu chuyện thực tế -->
+    <section id="cauthuc">
+        <h2>5. Câu chuyện thực tế</h2>
+        <div class="cards">
+            <div class="card">
+                <img src="14.jpg" alt="Nạn nhân">
+                <h3>Im lặng vì sợ hãi</h3>
+                <p>Nhiều học sinh bị xúc phạm trên mạng nhưng không dám nói ra vì lo bị chê cười.</p>
+            </div>
+
+            <div class="card">
+                <img src="15.jpg" alt="Chia sẻ">
+                <h3>Chia sẻ để được giúp đỡ</h3>
+                <p>Khi dám lên tiếng, nạn nhân sẽ nhận được sự hỗ trợ từ bạn bè và thầy cô.</p>
+            </div>
+
+            <div class="card">
+                <img src="16.jpg" alt="Đoàn kết">
+                <h3>Sức mạnh tập thể</h3>
+                <p>Sự đoàn kết giúp đẩy lùi các hành vi bạo lực trên mạng.</p>
+            </div>
+        </div>
+	<div class="video-container" style="text-align: center; margin: 30px auto; max-width: 850px;">
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+        <iframe 
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+            src="https://www.youtube.com/embed/ksWM9UDA1hk?rel=0&showinfo=0" 
+            title="Phòng chống bạo lực mạng" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen>
+        </iframe>
+    </div>
+    <p style="margin-top: 15px; font-style: italic; color: #666; font-size: 16px;">
+        💡 Nếu video không hiển thị, hãy thử làm mới (F5) trang web.
+    </p>
+</div>
+    </section>
+
+    <!-- Kỹ năng an toàn mạng -->
+    <section id="kynang">
+        <h2>6. Kỹ năng sử dụng mạng an toàn</h2>
+        <div class="cards">
+            <div class="card">
+                <img src="17.jpg" alt="Bảo mật">
+                <h3>Bảo mật thông tin</h3>
+                <p>Không chia sẻ mật khẩu, số điện thoại, địa chỉ cá nhân.</p>
+            </div>
+
+            <div class="card">
+                <img src="18.jpg" alt="Kiểm soát">
+                <h3>Kiểm soát cảm xúc</h3>
+                <p>Không phản ứng nóng giận trước các bình luận tiêu cực.</p>
+            </div>
+
+            <div class="card">
+                <img src="19.jpg" alt="Báo cáo">
+                <h3>Báo cáo vi phạm</h3>
+                <p>Sử dụng chức năng report khi gặp nội dung xấu.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Thông điệp -->
+    <section id="thongdiep">
+        <h2>7. Thông điệp gửi tới cộng đồng</h2>
+        <div class="intro">
+            <img src="20.jpg" alt="Thông điệp">
+            <div>
+                <p style="font-size: 22px; line-height: 1.6; color: #1e293b;">
+                    Mạng xã hội sẽ trở nên tốt đẹp hơn khi mỗi người biết tôn trọng,
+                    yêu thương và chia sẻ tích cực.
+                </p>
+                <p style="font-size: 22px; line-height: 1.6; color: #1e293b;">
+                    Hãy nhớ rằng: Im lặng trước bạo lực là tiếp tay cho bạo lực.
+                    Hãy lên tiếng để bảo vệ chính mình và người khác.
+                </p>
+                <p style="font-size: 22px; line-height: 1.6; color: #1e293b;"><b>Đừng im lặng – Hãy hành động vì một môi trường mạng văn minh!</b></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Số liệu và thống kê -->
+    <section id="solieu">
+        <h2>8. Một số số liệu đáng chú ý</h2>
+        <div class="cards">
+            <div class="card">
+                <img src="21.jpg" alt="Thống kê">
+                <h3>Học sinh bị ảnh hưởng</h3>
+                <p>Hơn 60% học sinh từng thấy hoặc trải qua bạo lực mạng.</p>
+            </div>
+
+            <div class="card">
+                <img src="22.jpg" alt="Tâm lý">
+                <h3>Ảnh hưởng tâm lý</h3>
+                <p>Gần 40% nạn nhân có dấu hiệu stress kéo dài.</p>
+            </div>
+
+            <div class="card">
+                <img src="23.jpg" alt="Học tập">
+                <h3>Sa sút học tập</h3>
+                <p>Nhiều bạn học sinh mất tập trung vì áp lực từ mạng xã hội.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vai trò của gia đình và nhà trường -->
+    <section id="vaitro">
+        <h2>9. Vai trò của gia đình và nhà trường</h2>
+        <div class="intro">
+            <div>
+                <p style="font-size: 22px; line-height: 1.6; color: #1e293b;"><b>Gia đình:</b></p>
+                <ul style="font-size: 22px; line-height: 1.6; color: #1e293b;">
+                    <li>Quan tâm, lắng nghe con em.</li>
+                    <li>Hướng dẫn sử dụng Internet an toàn.</li>
+                    <li>Không la mắng khi con gặp sự cố.</li>
+                </ul>
+
+                <p style="font-size: 22px; line-height: 1.6; color: #1e293b;"><b>Nhà trường:</b></p>
+                <ul style="font-size: 22px; line-height: 1.6; color: #1e293b;">
+                    <li>Tuyên truyền về an toàn mạng.</li>
+                    <li>Tổ chức chuyên đề, ngoại khóa.</li>
+                    <li>Bảo vệ học sinh khi bị bắt nạt.</li>
+                </ul>
+            </div>
+
+            <img src="24.jpg" alt="Nhà trường">
+        </div>
+    </section>
+
+    <!-- Kịch bản thuyết trình -->
+    <section id="thuyettrinh">
+        <h2>10. Gợi ý bài thuyết trình</h2>
+        <div class="action">
+            <p style="font-size: 22px; line-height: 1.6; color: #1e293b;"><b>Mở đầu:</b></p>
+            <p style="font-size: 22px; line-height: 1.6; color: #1e293b;">"Các bạn có bao giờ bị chê bai, xúc phạm trên mạng chưa? Đó chính là bạo lực không gian mạng."</p>
+
+            <p style="font-size: 22px; line-height: 1.6; color: #1e293b;"><b>Nội dung chính:</b></p>
+            <ul style="font-size: 22px; line-height: 1.6; color: #1e293b;">
+                <li>Giải thích khái niệm bạo lực mạng.</li>
+                <li>Trình bày thực trạng hiện nay.</li>
+                <li>Phân tích tác hại.</li>
+                <li>Đưa ra giải pháp.</li>
+            </ul>
+
+            <p style="font-size: 22px; line-height: 1.6; color: #1e293b;"><b>Kết thúc:</b></p>
+            <p style="font-size: 22px; line-height: 1.6; color: #1e293b;">"Hãy cùng nhau nói không với bạo lực mạng. Đừng im lặng – hãy hành động!"</p>
+        </div>
+    </section>
+
+    <!-- Lời kêu gọi -->
+    <section id="keugo">
+        <h2>11. Lời kêu gọi hành động</h2>
+        <div class="intro">
+            <img src="25.jpg" alt="Hành động">
+            <div>
+                <p style="font-size: 22px; line-height: 1.6; color: #1e293b;">
+                    Mỗi học sinh hãy trở thành một "đại sứ văn minh mạng".
+                    Bắt đầu từ những việc nhỏ nhất: nói lời tích cực,
+                    bảo vệ bạn bè và lan tỏa yêu thương.
+                </p>
+
+                <p style="font-size: 22px; line-height: 1.6; color: #1e293b;">
+                    Chúng ta hoàn toàn có thể xây dựng một môi trường mạng:
+                    <b>An toàn – Lành mạnh – Nhân văn</b>.
+                </p>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+    <!-- Cam kết cá nhân -->
+        <!-- Góc nhìn pháp luật -->
+    <section id="phapluat">
+    <h2>12. Góc nhìn pháp luật về bạo lực mạng</h2>
+    <img src="26.png" alt="Pháp luật và Internet">
+    <div class="action">
+        <p style="font-size: 22px; line-height: 1.6; color: #1e293b;"> Theo pháp luật Việt Nam, bạo lực mạng là hành vi vi phạm nghiêm trọng và có thể bị xử lý theo quy định của Nhà nước.</p>
+
+        <p style="font-size: 22px; line-height: 1.6; color: #1e293b;"><b> Một số quy định quan trọng:</b></p>
+        <ul style="font-size: 22px; line-height: 1.6; color: #1e293b;">
+            <li>Điều 155 Bộ luật Hình sự: Làm nhục người khác qua mạng.</li>
+            <li>Điều 156 Bộ luật Hình sự: Vu khống, bịa đặt thông tin sai sự thật.</li>
+            <li>Nghị định 15/2020/NĐ-CP: Xử phạt hành chính hành vi xúc phạm.</li>
+        </ul>
+
+        <p style="font-size: 22px; line-height: 1.6; color: #1e293b;"><b> Các hành vi có thể bị xử lý:</b></p>
+        <ul style="font-size: 22px; line-height: 1.6; color: #1e293b;">
+            <li>Chửi bới, xúc phạm trên mạng xã hội.</li>
+            <li>Đăng tin giả, cắt ghép hình ảnh.</li>
+            <li>Đe dọa, quấy rối qua tin nhắn.</li>
+        </ul>
+
+        <p style="font-size: 22px; line-height: 1.6; color: #1e293b;"><b> Quyền lợi của nạn nhân:</b></p>
+        <ul style="font-size: 22px; line-height: 1.6; color: #1e293b;">
+            <li>Yêu cầu gỡ bỏ nội dung xấu.</li>
+            <li>Báo cáo cơ quan chức năng.</li>
+            <li>Được pháp luật bảo vệ.</li>
+        </ul>
+
+        <p style="font-size: 22px; line-height: 1.6; color: #1e293b;"><b> Thông điệp:</b> Mạng xã hội không phải "vùng đất vô luật". Hãy sử dụng Internet có trách nhiệm.</p>
+    </div>
+</section>
+
+
+
+    <!-- Tình huống minh họa -->
+    <section id="tinhhuong">
+    <h2>13. Một số tình huống thường gặp</h2>
+    <img src="31.png" alt="Tình huống mạng xã hội">
+        <div class="cards">
+            <div class="card">
+                <h3>Tình huống 1</h3>
+                <p>Một bạn bị chế giễu ngoại hình trong nhóm lớp online.</p>
+                <p><b>Cách xử lý:</b> Chụp lại bằng chứng, báo giáo viên chủ nhiệm.</p>
+            </div>
+
+            <div class="card">
+                <h3>Tình huống 2</h3>
+                <p>Ảnh riêng tư bị chia sẻ trái phép.</p>
+                <p><b>Cách xử lý:</b> Yêu cầu xóa, báo cáo nền tảng.</p>
+            </div>
+
+            <div class="card">
+                <h3>Tình huống 3</h3>
+                <p>Bị lập tài khoản giả để nói xấu.</p>
+                <p><b>Cách xử lý:</b> Thu thập chứng cứ, nhờ người lớn hỗ trợ.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Câu hỏi thường gặp -->
+    <section id="faq">
+    <h2>14. Câu hỏi thường gặp</h2>
+    <img src="27.png" alt="Câu hỏi và hỗ trợ">
+        <div class="action">
+            <p style="font-size: 22px; line-height: 1.6; color: #1e293b;"><b>❓ Khi bị bắt nạt trên mạng, nên làm gì trước tiên?</b></p>
+            <p style="font-size: 22px; line-height: 1.6; color: #1e293b;">→ Giữ bình tĩnh, không đáp trả, lưu bằng chứng.</p>
+
+            <p style="font-size: 22px; line-height: 1.6; color: #1e293b;"><b>❓ Có nên tự giải quyết một mình không?</b></p>
+            <p style="font-size: 22px; line-height: 1.6; color: #1e293b;">→ Không. Hãy chia sẻ với gia đình, thầy cô.</p>
+
+            <p style="font-size: 22px; line-height: 1.6; color: #1e293b;"><b>❓ Báo cáo trên mạng xã hội có hiệu quả không?</b></p>
+            <p style="font-size: 22px; line-height: 1.6; color: #1e293b;">→ Có. Các nền tảng đều có chính sách bảo vệ người dùng.</p>
+        </div>
+    </section>
+
+    <!-- Checklist tự bảo vệ -->
+    <section id="checklist">
+    <h2>15. Checklist tự bảo vệ bản thân</h2>
+    <img src="28.png" alt="Bảo mật thông tin">
+        <div class="action">
+            <ul style="font-size: 22px; line-height: 1.6; color: #1e293b;">
+                <li> Cài đặt quyền riêng tư tài khoản</li>
+                <li> Không kết bạn với người lạ</li>
+                <li> Không chia sẻ thông tin cá nhân</li>
+                <li> Kiểm tra thông tin trước khi chia sẻ.</li>
+                <li> Chặn các tài khoản xấu.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Tổng kết chung -->
+    <section id="tongket">
+    <h2>16. Tổng kết chung</h2>
+    <img src="29.png" alt="Chung tay vì môi trường mạng">
+        <div class="action">
+            <ul style="font-size: 22px; line-height: 1.6; color: #1e293b;">
+                <li> Bạo lực không gian mạng là vấn đề nghiêm trọng, ảnh hưởng trực tiếp đến tâm lý, học tập và tương lai của học sinh.</li>
+                <li> Việc phòng chống bạo lực mạng không phải là trách nhiệm của riêng ai mà là của toàn xã hội.</li>
+                <li> Mỗi hành động nhỏ hôm nay sẽ tạo nên một môi trường mạng an toàn cho thế hệ mai sau.</li>
+                <li> Hãy cùng nhau xây dựng môi trường mạng văn minh – an toàn – tích cực.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="camket">
+    <h2>17. Cam kết hành động của học sinh</h2>
+    <img src="30.png" alt="Học sinh chung tay bảo vệ môi trường mạng">
+         <div class="action">
+            <ul style="font-size: 22px; line-height: 1.6; color: #1e293b;">
+                <li> Sử dụng mạng xã hội một cách văn minh, lịch sự.</li>
+                <li> Không đăng tải, chia sẻ thông tin sai sự thật.</li>
+                <li> Không tham gia xúc phạm, bắt nạt người khác.</li>
+                <li> Bảo vệ thông tin cá nhân của bản thân.</li>
+                <li>Báo cáo khi phát hiện hành vi bạo lực mạng.</li>
+            </ul>
+        </div>
+
+<footer>
+    <p>© 2026 - Website tuyên truyền phòng chống bạo lực không gian mạng</p>
+    <p> Hãy cùng nhau nói KHÔNG với bạo lực mạng và xây dựng môi trường Internet an toàn, tích cực.</p>
+</footer>
+
+</body>
+</html>
